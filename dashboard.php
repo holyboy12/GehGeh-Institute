@@ -1,19 +1,35 @@
+<?php
+session_start();
+if (!isset($_SESSION['student'])) {
+    header("Location: index.html");
+    exit();
+}
+
+$conn = new mysqli("localhost", "root", "", "student_portal");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+$studentName = $_SESSION['student'];
+$sql = "SELECT profile_image FROM students WHERE fullname='$studentName'";
+$result = $conn->query($sql);
+$row = $result->fetch_assoc();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-</head>
-<style>
+    <style>
 /* General page setup */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
- background: linear-gradient(135deg, #8B4513, #D2691E);
-
-
+  background: linear-gradient(135deg, #8B4513, #D2691E);
 }
 
 /* Dashboard container */
@@ -60,9 +76,9 @@ body {
 /* Each section sits below the other */
 .secside {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two cards side by side */
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
-  margin-bottom: 30px; /* Space between sections */
+  margin-bottom: 30px;
 }
 
 /* Card style */
@@ -100,57 +116,48 @@ body {
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .secside {
-    grid-template-columns: 1fr; /* Stack cards vertically on small screens */
+    grid-template-columns: 1fr;
   }
 }
 
+/* Animations */
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
 
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
 
-        @keyframes slideInLeft {
-            from {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                transform: translateX(100%);
-                opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-
-    .animate-left {
-        animation: slideInLeft 1s ease-out forwards;
-    }
-
-    .animate-right {
-        animation: slideInRight 1s ease-out forwards;
-    }
-</style>
+.animate-left { animation: slideInLeft 1s ease-out forwards; }
+.animate-right { animation: slideInRight 1s ease-out forwards; }
+    </style>
+</head>
 <body>
     <div class="dash">
         <div class="upper">
-            <h1>Welcome Back!</h1>
-
-            <a href="index.html"><button>Logout</button></a>
+            <h1>Welcome Back, <?php echo htmlspecialchars($studentName); ?>!</h1>
+            <a href="logout.php"><button>Logout</button></a>
         </div>
 
         <section class="secside animate-left">
             <div class="sec1">
-                <a href="#">
-                    <img src="#" alt="student image">
-                    <h3>Animashaun Okikiola</h3>
-                </a>
+              <a href="#">
+                  <img src="<?php echo $row['profile_image'] ? 'uploads/'.$row['profile_image'] : 'default.png'; ?>" 
+                      alt="student image" 
+                      style="width:120px;height:120px;border-radius:50%;object-fit:cover;">
+                  <h3><?php echo htmlspecialchars($studentName); ?></h3>
+              </a>
+
+              <!-- Upload form -->
+              <form action="upload_image.php" method="post" enctype="multipart/form-data">
+                  <input type="file" name="profile_image" accept="image/*" required>
+                  <button type="submit">Upload</button>
+              </form>
             </div>
+
             <div class="sec2">
                 <a href="complaint.html">
                     <img src="compliant icon.png" alt="image">

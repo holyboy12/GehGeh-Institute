@@ -140,9 +140,59 @@
 
           <button type="submit">Publish Update</button>
         </form>
-        <a href="index.html"> <button>Logout</button></a>
       </div>
     </div>
+
+    <!-- Attendance Section -->
+    <div class="section">
+      <h3>📊 Attendance Records</h3>
+  
+      <!-- Download Button -->
+      <form action="download_attendance.php" method="post">
+        <button type="submit">⬇️ Download Attendance (CSV)</button>
+      </form>
+
+      <table>
+        <tr>
+          <th>Student Name</th>
+          <th>Student ID</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Submitted At</th>
+          <th>Action</th> <!-- New column for delete -->
+        </tr>
+        <?php
+          $conn = new mysqli("localhost", "root", "", "student_portal");
+
+          if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+          }
+
+          $result = $conn->query("SELECT * FROM attendance ORDER BY created_at DESC");
+
+          while($row = $result->fetch_assoc()) {
+              echo "<tr>
+                      <td>".$row['studentName']."</td>
+                      <td>".$row['studentID']."</td>
+                      <td>".$row['date']."</td>
+                      <td>".$row['status']."</td>
+                      <td>".$row['created_at']."</td>
+                      <td>
+                        <form action='delete_attendance.php' method='POST' style='display:inline;'>
+                          <input type='hidden' name='id' value='".$row['id']."'>
+                          <button type='submit' onclick=\"return confirm('Are you sure you want to delete this record?');\"> Delete</button>
+                        </form>
+                      </td>
+                    </tr>";
+          }
+          $conn->close();
+        ?>
+      </table>
+
+    </div>
+
+   <a href="index.html"> <button>Logout</button></a> 
+
   </div>
 </body>
 </html>

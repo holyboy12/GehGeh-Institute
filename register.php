@@ -27,7 +27,7 @@ $sql = "INSERT INTO students (fullname, email, matric, password, created_at)
 
 
 if ($conn->query($sql) === TRUE) {
-    echo "<script>alert('Registration successful! You can now login.'); window.location='dashboard.html';</script>";
+    echo "<script>alert('Registration successful! You can now login.'); window.location='dashboard.php';</script>";
 } else {
     echo "<script>alert('Error: Email or Matric already exists.'); window.history.back();</script>";
 }

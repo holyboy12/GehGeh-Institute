@@ -19,7 +19,7 @@ if ($result->num_rows === 1) {
     $row = $result->fetch_assoc();
     if (password_verify($password, $row['password'])) {
         $_SESSION['student'] = $row['fullname'];
-        echo "<script>alert('Login successful!'); window.location='dashboard.html';</script>";
+        echo "<script>alert('Login successful!'); window.location='dashboard.php';</script>";
     } else {
         echo "<script>alert('Invalid password!'); window.history.back();</script>";
     }
