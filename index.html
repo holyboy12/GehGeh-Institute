@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GEHGEH UNIVERSITY PORTAL</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #030303;
+      color: #333;
+    }
+
+    /* ===== TOP SECTION ===== */
+    .upper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: url("backg.jpeg") no-repeat center center;
+      background-size: cover;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    .logo {
+      max-width: 200px;
+      height: auto;
+      margin-bottom: 15px;
+      border-radius: 50%;
+    }
+
+    .upper h1 {
+      font-size: 36px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #fff;
+      letter-spacing: 2px;
+      margin: 20px 0;
+      font-family: 'Georgia', serif;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+      background: linear-gradient(90deg, rgb(247, 210, 1), #f0e68c, rgb(248, 186, 52));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ===== MARQUEE ===== */
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 15px 0;
+    }
+
+    .marquee-content {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll-left 60s linear infinite;
+    }
+
+    .marquee-content img {
+      height: 200px;
+      vertical-align: middle;
+      margin: 0 15px;
+    }
+
+    .marquee-content span {
+      color: white;
+      font-size: 18px;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+
+    @keyframes scroll-left {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* ===== LOGIN SECTION ===== */
+    .login-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 500px;
+      padding: 50px 20px;
+      background: #f7a901;
+      flex-wrap: wrap;
+    }
+
+    .login-container,
+    .admin {
+      background: #fff;
+      padding: 25px 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      width: 350px;
+    }
+
+    .login-container h2,
+    .admin h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .login-container p {
+      text-align: center;
+      color: #555;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #e2be4a;
+      box-shadow: 0 0 6px rgba(248, 200, 42, 0.3);
+    }
+
+    button {
+      width: 100%;
+      background: #f7a901;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background: #e2be4a;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    a {
+      margin-top: 55px;
+      color: #f7a901;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .login-wrapper {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- TOP SECTION -->
+  <div class="upper">
+    <img src="Gehgeh logo.png" alt="Gehgeh University Logo" class="logo">
+    <h1>GEHGEH UNIVERSITY OF WISDOM AND UNDERSTANDING</h1>
+
+    <div class="marquee">
+      <div class="marquee-content">
+        <img src="school images.jpeg" alt="Logo 1">
+        <span>Welcome to Gehgeh University of Wisdom and Understanding</span>
+        <img src="board images.jpeg" alt="Logo 2">
+        <span>Where All StakeHolds, Vice Chancellor and Lecturers Have Everyday Meeting and Daily Plan</span>
+        <img src="Student images.jpeg" alt="Logo 3">
+        <span>Our Students are Well Behaved, Dressed and Mannered</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGIN SECTION -->
+  <div class="login-wrapper">
+    <!-- STUDENT LOGIN -->
+    <div class="login-container">
+      <h2>STUDENT LOGIN</h2>
+      <p>Welcome to the Gehgeh University Portal. Please log in to access your account.</p>
+      <form action="student_login.php" method="post">
+        <label for="email">Email:</label>
+        <input type="email" id="loginEmail" name="email" placeholder="Enter your email" required>
+
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" name="password" placeholder="Enter your password" required>
+
+        <button type="submit">Login</button>
+      </form>
+      <p>Don't have an account? <a href="register.html">Register here</a></p>
+    </div>
+
+    <!-- ADMIN LOGIN -->
+    <div class="admin">
+      <h2>ADMIN LOGIN</h2>
+      <form action="admin_login.php" method="post">
+        <label for="adminPassword">Password:</label>
+        <input type="password" id="adminPassword" name="password" placeholder="Enter your password" required>
+        <a href="admin.php"><button type="submit">Login</button></a>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

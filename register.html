@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <style>
+    /* General body styling */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f7a901, #fad501);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Container styling */
+    .registerform {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    /* Heading */
+    .registerform h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 24px;
+      color: #333;
+    }
+
+    /* Labels */
+    .registerform label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      color: #444;
+    }
+
+    /* Input fields */
+    .registerform input {
+      width: 90%;
+      padding: 12px 10px;
+      margin-bottom: 18px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+
+    /* Input focus effect */
+    .registerform input:focus {
+      border-color: #eed706;
+      box-shadow: 0 0 6px rgba(243, 179, 2, 0.4);
+    }
+
+    /* Button */
+    .registerform button {
+      width: 100%;
+      background: #f1c605;
+      color: #fff;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    /* Button hover effect */
+    .registerform button:hover {
+      background: #f7bd02;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 480px) {
+      .registerform {
+        padding: 20px;
+      }
+      .registerform h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="registerform">
+    <h2>Register Here!</h2>
+
+    <form action="register.php" method="POST">
+      <label for="fullname">Fullname:</label>
+      <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="matric">Matric No:</label>
+      <input type="text" id="matric" name="matric" placeholder="Enter your matric no" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+      <label for="confirm">Confirm Password:</label>
+      <input type="password" id="confirm" name="confirm" placeholder="Confirm password" required>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</body>
+</html>
