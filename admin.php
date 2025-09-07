@@ -190,6 +190,74 @@
       </table>
 
     </div>
+    <!-- PDF Upload Section -->
+    <div class="section">
+      <h3>📂 Upload PDF</h3>
+      <form action="upload_pdf.php" method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="PDF Title" required>
+        <input type="file" name="pdf_file" accept="application/pdf" required>
+        <button type="submit">Upload PDF</button>
+      </form>
+
+      <h4>PDF Access Logs</h4>
+      <table>
+          <tr>
+              <th>Student</th>
+              <th>PDF</th>
+              <th>Opened At</th>
+              <th>Action</th>
+          </tr>
+          <?php
+          $conn = new mysqli("localhost", "root", "", "student_portal");
+          if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
+
+          $result = $conn->query("
+              SELECT v.view_id, v.opened_at, v.student, p.title
+              FROM pdf_views v
+              JOIN pdf_files p ON p.pdf_id = v.pdf_id
+              ORDER BY v.opened_at DESC
+          ");
+
+          while ($row = $result->fetch_assoc()): ?>
+          <tr>
+              <td><?php echo htmlspecialchars($row['student']); ?></td>
+              <td><?php echo htmlspecialchars($row['title']); ?></td>
+              <td><?php echo htmlspecialchars($row['opened_at']); ?></td>
+              <td>
+                  <form action="delete_pdf_log.php" method="POST" style="display:inline;">
+                      <input type="hidden" name="view_id" value="<?php echo $row['view_id']; ?>">
+                      <button type="submit" onclick="return confirm('Delete this log entry?');">🗑️ Delete</button>
+                  </form>
+              </td>
+          </tr>
+      <?php endwhile; ?>
+
+
+          <!-- $conn->close();
+          ?> -->
+      </table>
+
+
+
+    </div>
+
+    <!-- Results Upload Section -->
+    <div class="section">
+      <h3>📊 Upload Results (CSV)</h3>
+      <form action="upload_results.php" method="POST" enctype="multipart/form-data">
+        <select name="student_id" required>
+          <?php
+          $students = $conn->query("SELECT id, fullname FROM students ORDER BY fullname");
+          while($s = $students->fetch_assoc()) {
+              echo "<option value='{$s['id']}'>{$s['fullname']}</option>";
+          }
+          ?>
+        </select>
+        <input type="file" name="result_file" accept="application/pdf" required>
+        <button type="submit">Upload PDF Result</button>
+      </form>
+
+    </div>
 
    <a href="index.html"> <button>Logout</button></a> 
 

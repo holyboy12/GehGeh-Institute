@@ -180,6 +180,21 @@ body {
                 </a>
             </div>
         </section>
+        <section class="secside animate-left">
+          <div class="sec2">
+              <a href="student_pdfs.php">
+                  <img src="pdficon.png" alt="pdf">
+                  <h3>Get PDF</h3>
+              </a>
+          </div>
+          <div class="sec2">
+              <a href="student_results.php">
+                  <img src="Resulticon.png" alt="result">
+                  <h3>Check Result</h3>
+              </a>
+          </div>
+        </section>
+
     </div>
 </body>
 </html>

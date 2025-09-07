@@ -1,12 +1,15 @@
 <?php
-$firstname = $_POST['firstname'];
-$lastname = $_POST['lastname']; 
-$email = $_POST['email'];
-$dob = $_POST['dob'];
-$country = $_POST['country'];
-$password = $_POST['password'];
-$confirmpassword = $_POST['confirmpassword'];
+// connect.php - Database connection only
+$servername = "localhost";
+$username = "root";
+$password = ""; // MySQL password
+$database = "student_portal";
 
-//database connection
+// Create connection
+$conn = new mysqli($servername, $username, $password, $database);
 
+// Check connection
+if ($conn->connect_error) {
+    die("❌ Connection failed: " . $conn->connect_error);
+}
 ?>
